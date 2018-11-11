@@ -1,3 +1,4 @@
+//CHANGE STATIC PARAMETER "host" BY GIVING HEADER OF HOSTED SERVER IP/NAME FOR PROPER FUNCTIONING
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 16crypt
  */
-@WebServlet(urlPatterns = {""})
-public class index extends HttpServlet {
-
+@WebServlet(urlPatterns = {"/next"})
+public class next extends HttpServlet {
+    static String host = "localhost:8080/"; 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,17 +37,28 @@ public class index extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>#PHP#MY#ADMIN</title>");            
+            out.println("<title>DECIDER</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"serveletJDBC\\next\">");
-            out.println("<select name=\"main-menu\">");
-            out.println("<option value=\"create\" id=\"create\">create table</option>");
-            out.println("<option value=\"drop\" id=\"drop\">drop table</option>");
-            out.println("<option value=\"view\" id=\"view\">view table</option>");
-            out.println("</select>");
-            out.println("<input type=\"submit\" value=\"SUBMIT\">");
-            out.println("</form>"); 
+            String selectedOption = request.getParameter("main-menu");
+            if(selectedOption.equals("create")){
+             out.println("table creation request");
+             out.println("<script>");
+             out.println("window.location.href=\"//"+host+"/serveletJDBC/create\"");
+             out.println("</script>");
+            }
+            else if(selectedOption.equals("drop")){
+             out.println("table view request");
+             out.println("<script>");
+             out.println("window.location.href=\"//"+host+"/serveletJDBC/drop\"");
+             out.println("</script>");   
+            }
+            else if(selectedOption.equals("view")){
+             out.println("table drop request");
+             out.println("<script>");
+             out.println("window.location.href=\"//"+host+"/serveletJDBC/view\"");
+             out.println("</script>");   
+            }
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,6 +76,7 @@ public class index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //String selectedMenu = request.getParameter("main-menu");
         processRequest(request, response);
     }
 

@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 16crypt
  */
-@WebServlet(urlPatterns = {""})
-public class index extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/create"})
+public class create extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,17 +37,17 @@ public class index extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>#PHP#MY#ADMIN</title>");            
+            out.println("<title>CREATE TABLE</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"serveletJDBC\\next\">");
-            out.println("<select name=\"main-menu\">");
-            out.println("<option value=\"create\" id=\"create\">create table</option>");
-            out.println("<option value=\"drop\" id=\"drop\">drop table</option>");
-            out.println("<option value=\"view\" id=\"view\">view table</option>");
-            out.println("</select>");
-            out.println("<input type=\"submit\" value=\"SUBMIT\">");
-            out.println("</form>"); 
+            out.println("Enter<br>");
+            out.println("<form method=\"get\" action=\"createHelper\">");
+            out.println("<table>");
+            out.println("<tr><td>Name</td><td><input name=\"dbName\" type=\"text\" required=\"true\" id=\"unique\"></td></tr>");
+            out.println("<br><tr><td>Number of columns: </td><td><input name=\"dbColNum\" type=\"number\" min=\"1\" required=\"true\"></td></tr>");
+            out.println("</table>");
+            out.println("<br><input type=\"submit\" value=\"PROCEED\">");
+            out.println("</form>");
             out.println("</body>");
             out.println("</html>");
         }
